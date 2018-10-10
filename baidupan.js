@@ -1,16 +1,37 @@
 // ==UserScript==
 // @name         针对百度盘播放器插件
 // @description  对百度盘播放器的功能进行增强, c加速, x减速, z恢复原始速度。
-// @version      0.1
+// @version      0.5
 // @author       lianghaikun
 // @match        *://pan.baidu.com/play/video*
 // @grant        none
 // @require    http://code.jquery.com/jquery-1.11.0.min.js
 // ==/UserScript==
 
+
+/*
+
+ 快捷键说明：
+
+ 播放时间定位：
+ 方向键右→：快进3秒
+ 方向键左←：后退3秒
+
+ 音量调节：
+ 方向键上↑：音量升高 1%
+ 方向键下↓：音量降低 1%
+
+ 播放速度调节：
+ 按键C：加速播放 +0.1
+ 按键X：减速播放 -0.1
+ 按键Z、1：正常速度播放
+ 按键2：2倍速度播放
+ 按键3：3倍速度播放
+
+ */
 (function() {
     'use strict';
-    $(".header-box").append("<div id='course1'>html1</div>");
+    // $(".header-box").append("<div id='course1'>html1</div>");
     $("#video-wrap-outer").append("<div id=\"html_player_enhance_tips\">tipps</div>");
     $("#html_player_enhance_tips").attr("style", "position: absolute;z-index: 999999;padding: 10px;background: rgba(0,0,0,0.8);color:white;top: 50%;left: 50%;transform: translate(-50%,-50%);transition: all 500ms ease;display: none; -webkit-font-smoothing: subpixel-antialiased;font-family: 'microsoft yahei', Verdana, Geneva, sans-serif;-webkit-user-select: none;fontSize: 20px;");
 
@@ -21,38 +42,60 @@
                 tempRate = player().playbackRate()
                 tempRate -= 0.1;
                 player().setPlaybackRate(tempRate)
+                settips("播放速度：" +tempRate.toFixed(1) + "倍");
             }
             //按键C：加速播放 +0.1
             if (event.keyCode === 67) {
                 tempRate = player().playbackRate()
                 tempRate += 0.1;
                 player().setPlaybackRate(tempRate)
+                settips("播放速度：" +tempRate.toFixed(1) + "倍");
             }
             //按键Z：正常速度播放
             if (event.keyCode === 90) {
                 tempRate = 1;
                 player().setPlaybackRate(tempRate)
+                settips("播放速度：" +tempRate + "倍");
             }
             //按键1：播放*1
             if (event.keyCode === 49) {
                 tempRate = player().playbackRate()
                 tempRate = 1;
                 player().setPlaybackRate(tempRate)
+                settips("播放速度：" +tempRate + "倍");
             }
             //按键2：播放*2
             if (event.keyCode === 50) {
                 tempRate = player().playbackRate()
                 tempRate = 2;
                 player().setPlaybackRate(tempRate)
+                settips("播放速度：" +tempRate + "倍");
             }
             //按键3：播放*3
             if (event.keyCode === 51) {
                 tempRate = player().playbackRate()
                 tempRate = 3;
                 player().setPlaybackRate(tempRate)
+                settips("播放速度：" +tempRate + "倍");
             }
-        settips(tempRate);
-        $("#course1").html(tempRate);
+
+            //方向键右→：快进3秒
+            if (event.keyCode === 39) {
+                settips("快进：3秒");
+            }
+            //方向键左←：后退3秒
+            if (event.keyCode === 37) {
+                settips("后退：3秒");
+            }
+            //方向键上↑：音量升高 1%
+            if (event.keyCode === 38) {
+                settips("音量：升高1%");
+            }
+            //方向键下↓：音量降低 1%
+            if (event.keyCode === 40) {
+                settips("音量：降低1%");
+            }
+        // $(".header-box").html(tempRate);
     }
     function settips (tempRate) {
         $('#html_player_enhance_tips').html(tempRate);
