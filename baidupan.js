@@ -13,7 +13,6 @@
     $(".header-box").append("<div id='course1'>html1</div>");
     var tempRate = 0;
     document.onkeydown = function (event) {
-
             //按键X：减速播放 -0.1
             if (event.keyCode === 88) {
                 tempRate = videojs.getPlayers("video-player").html5player.tech_.playbackRate()
@@ -31,7 +30,25 @@
                 tempRate = 1;
                 videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(tempRate)
             }
+            //按键1：播放*1
+            if (event.keyCode === 49) {
+                tempRate = videojs.getPlayers("video-player").html5player.tech_.playbackRate()
+                tempRate = 1;
+                videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(tempRate)
+            }
+            //按键2：播放*2
+            if (event.keyCode === 50) {
+                tempRate = videojs.getPlayers("video-player").html5player.tech_.playbackRate()
+                tempRate = 2;
+                videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(tempRate)
+            }
+            //按键3：播放*3
+            if (event.keyCode === 51) {
+                tempRate = videojs.getPlayers("video-player").html5player.tech_.playbackRate()
+                tempRate = 3;
+                videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(tempRate)
+            }
         $("#course1").html(tempRate);
-        }
+    }
     // Your code here...
 })();
